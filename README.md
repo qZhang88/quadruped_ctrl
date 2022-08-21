@@ -3,25 +3,45 @@
 ### MIT mini cheetah simulation in pybullet
 MIT mini cheetah use customized simulator and lcm framework, which is not a popular way to do the robot development. Now, we extract the algorithm and do the simulation using ros and pybullet. This can be simple to deploy the system into different custom robot or plantform, and easy to learn the algorithm.
 
-<img src="https://github.com/Derek-TH-Wang/quadruped_ctrl/blob/master/quadruped_balance.gif" alt="show" />
-<img src="https://github.com/Derek-TH-Wang/quadruped_ctrl/blob/master/vision.png" alt="show" />
-<img src="https://github.com/Derek-TH-Wang/quadruped_ctrl/blob/master/rviz.png" alt="show" />
+<img src="quadruped_balance.gif" alt="show" />
+<img src="vision.png" alt="show" />
+<img src="rviz.png" alt="show" />
 
 ### System requirements:
-Ubuntu 18.04, ROS Melodic
+Ubuntu 20.04, ROS Noetic
 
 ### Dependency:
-use Logitech gamepad to control robot
-```
+
+Clone all three repos under same directory with this repo.
+
+```bash
+# use Logitech gamepad to control robot
 git clone https://github.com/Derek-TH-Wang/gamepad_ctrl.git
+
+# msg rospack and rviz plugin
+git clone https://github.com/loco-3d/whole_body_state_msgs.git
+git clone https://github.com/eborghi10/whole_body_state_rviz_plugin.git
 ```
-msg rospack and rviz plugin
+
+### Run
+
+We run this inside a docker container.
+
+**Start docker**
+
+Build docker image and start container.
+```bash
+cd docker
+docker build -t ros-desktop .
+
+xhost +
+./run_docker.sh
 ```
-https://github.com/loco-3d/whole_body_state_msgs.git
-https://github.com/eborghi10/whole_body_state_rviz_plugin.git
-```
-### Build
-```
+
+**Build**
+```bash
+docker attach
+
 cd {your workspace}
 catkin make
 source devel/setup.bash
